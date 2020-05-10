@@ -135,13 +135,15 @@ class Descrambler:
             wordLen = len(word)
             sortedWords[wordLen].append(word)
 
+        for i in range(3,8):
+            sortedWords[i] = sorted(sortedWords[i])
+
         if self.verboseFlag:
             for key in sortedWords:
                 print("\nLENGTH OF " + str(key) + " ===============")
                 for word in sortedWords[key]:
                     print(word)
-
-
+            
         return sortedWords
 
 
@@ -153,11 +155,11 @@ class Descrambler:
     def crossCheck(self, wordSet):
         verifiedWordSet = set() 
 
-        verifiedWordSet.update(wordSet.intersection(set(self.THREE_LETTER_WORDS)))
-        verifiedWordSet.update(wordSet.intersection(set(self.FOUR_LETTER_WORDS)))
-        verifiedWordSet.update(wordSet.intersection(set(self.FIVE_LETTER_WORDS)))
-        verifiedWordSet.update(wordSet.intersection(set(self.SIX_LETTER_WORDS)))
-        verifiedWordSet.update(wordSet.intersection(set(self.SEVEN_LETTER_WORDS)))
+        verifiedWordSet.update(set(self.THREE_LETTER_WORDS).intersection(wordSet))
+        verifiedWordSet.update(set(self.FOUR_LETTER_WORDS).intersection(wordSet))
+        verifiedWordSet.update(set(self.FIVE_LETTER_WORDS).intersection(wordSet))
+        verifiedWordSet.update(set(self.SIX_LETTER_WORDS).intersection(wordSet))
+        verifiedWordSet.update(set(self.SEVEN_LETTER_WORDS).intersection(wordSet))
 
         return verifiedWordSet
 
